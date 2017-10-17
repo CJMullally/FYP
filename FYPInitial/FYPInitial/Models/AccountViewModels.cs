@@ -64,7 +64,7 @@ namespace FYPInitial.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Email is required.")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

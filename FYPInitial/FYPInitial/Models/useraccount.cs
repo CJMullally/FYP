@@ -12,11 +12,10 @@ namespace FYPInitial.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class product
+    public partial class useraccount
     {
-        public int ProductID { get; set; }
-        public string ProductName { get; set; }
-        public Nullable<decimal> Price { get; set; }
-        public Nullable<int> Count { get; set; }
+        public int UserID { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }
