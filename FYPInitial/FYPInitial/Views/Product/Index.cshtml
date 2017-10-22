@@ -7,19 +7,31 @@
 
 <h2>Index</h2>
 
+@* This is an index page which lists current products *@
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table class="table">
+
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ProductName)
+            @Html.ActionLink("Product Name", "Index", new { sortOrder = ViewBag.ProductNameSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Count)
+            Count
         </th>
         <th></th>
     </tr>
