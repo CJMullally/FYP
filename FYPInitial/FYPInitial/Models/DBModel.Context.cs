@@ -26,6 +26,5 @@ namespace FYPInitial.Models
         }
     
         public virtual DbSet<product> products { get; set; }
-        public virtual DbSet<useraccount> useraccounts { get; set; }
     }
 }

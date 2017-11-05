@@ -1,0 +1,38 @@
+﻿
+
+@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Available Roles For Application</h2>
+
+@Html.ActionLink("Create Role", "Create", "Role")
+
+
+<style type="text/css">
+    #tbrole, .c {
+        border: unset;
+    }
+</style>
+
+
+<br />
+<br />
+
+<table id="tbrole">
+    <tr>
+        <td class="c">
+            <b>Role Name</b>
+        </td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="c">
+                @item.Name
+            </td>
+        </tr>
+    }
+</table>

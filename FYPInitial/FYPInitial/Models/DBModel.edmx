@@ -14,17 +14,8 @@
           <Property Name="Price" Type="decimal" Precision="10" Scale="0" />
           <Property Name="Count" Type="int" />
         </EntityType>
-        <EntityType Name="useraccounts">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="45" Nullable="false" />
-        </EntityType>
         <EntityContainer Name="cleanenergyirelanddbModelStoreContainer">
           <EntitySet Name="product" EntityType="Self.product" Schema="cleanenergyirelanddb" store:Type="Tables" />
-          <EntitySet Name="useraccounts" EntityType="Self.useraccounts" Schema="cleanenergyirelanddb" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -41,16 +32,7 @@
         </EntityType>
         <EntityContainer Name="DBModels" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="products" EntityType="Self.product" />
-          <EntitySet Name="useraccounts" EntityType="cleanenergyirelanddbModel.useraccount" />
         </EntityContainer>
-        <EntityType Name="useraccount">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -64,15 +46,6 @@
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="useraccounts">
-            <EntityTypeMapping TypeName="cleanenergyirelanddbModel.useraccount">
-              <MappingFragment StoreEntitySet="useraccounts">
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

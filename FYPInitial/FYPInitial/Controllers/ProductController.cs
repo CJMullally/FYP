@@ -5,15 +5,18 @@ using System.Web;
 using System.Data;
 using System.Web.Mvc;
 using FYPInitial.Models;
+using FYPInitial.CustomFilters;
 
 // This controller manages the product CRUD functionality 
+
 namespace FYPInitial.Controllers
 {
+    [AuthLog(Roles = "Admin")]
     public class ProductController : Controller
     {
         // GET: Product
         // Populates the list on the index page
-       
+        [AllowAnonymous]
         public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.ProductNameSortParm = String.IsNullOrEmpty(sortOrder) ? "product_desc" : "";
@@ -50,6 +53,7 @@ namespace FYPInitial.Controllers
 
         // GET: Product/Details/5
         // Returns a view containing product details
+        [AllowAnonymous]
         public ActionResult Details(int id)
         {
             product productModel = new product();
