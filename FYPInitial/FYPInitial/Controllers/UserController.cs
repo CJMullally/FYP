@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+//Controller to manage users based on role
 namespace FYPInitial.Controllers
 {
     public class UserController : Controller

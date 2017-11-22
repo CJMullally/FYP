@@ -8,6 +8,8 @@ using FYPInitial.CustomFilters;
 
 // Tutorial Used: https://youtu.be/Jt9vSY802mM
 
+//Controller for Calendar functionality
+
 namespace FYPInitial.Controllers
 {
     [AuthLog(Roles = "Admin")]
@@ -23,6 +25,7 @@ namespace FYPInitial.Controllers
         [AllowAnonymous]
         public JsonResult GetEvents()
         {
+            //Populate the calendar
             using (Models.DBModels dbModel = new DBModels()) {
                 var events = dbModel.events.ToList();
                 return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -32,6 +35,7 @@ namespace FYPInitial.Controllers
         [HttpPost]
         public JsonResult SaveEvent(@event e)
         {
+            //Save a calendar event
             var status = false;
             using (Models.DBModels dbModel = new DBModels()) {
                     if (e.EventID > 0)
@@ -62,6 +66,7 @@ namespace FYPInitial.Controllers
         [HttpPost]
         public JsonResult DeleteEvent(int EventID)
         {
+            //Delete selected event on the calendar
             var status = false;
             using (Models.DBModels dbModel = new DBModels())
             {
