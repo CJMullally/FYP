@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Admin Panel</title>
+    <title>@ViewBag.Title - Employee Panel</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -22,8 +22,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Manage Bookings", "Index", "Calendar")</li>
-                    <li>@Html.ActionLink("Product Management", "Index", "Product")</li>
-                    <li>@Html.ActionLink("Role Management", "Index", "Role")</li>
+                    <li>@Html.ActionLink("Appointments", "Index", "EmployeeCalendar")</li>
+                    
                     
                 </ul>
                 @Html.Partial("_LoginPartial")

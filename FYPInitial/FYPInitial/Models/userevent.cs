@@ -12,13 +12,14 @@ namespace FYPInitial.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class @event
+    public partial class userevent
     {
+        public int AppointmentID { get; set; }
         public int EventID { get; set; }
         public string Subject { get; set; }
-        public string Description { get; set; }
         public System.DateTime Start { get; set; }
         public System.DateTime End { get; set; }
-        public string ThemeColor { get; set; }
+        public string UserID { get; set; }
+        public string UserName { get; set; }
     }
 }

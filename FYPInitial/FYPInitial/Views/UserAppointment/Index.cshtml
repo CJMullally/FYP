@@ -1,0 +1,54 @@
+﻿@model FYPInitial.Models.userevent
+
+@{
+    ViewBag.Title = "My Appointments";
+}
+<br />
+<br />
+<h2>My Appointments</h2>
+
+<div>
+    <h4>Current Appointment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.End)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.End)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dd>
+            @Html.ActionLink("Cancel Appointment", "Delete")
+        </dd>
+        
+    </dl>
+
+</div>
+

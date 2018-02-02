@@ -1,0 +1,166 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div id="calendar"></div>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span id="eventTitle"></span></h4>
+            </div>
+            <div class="modal-body">
+                <button id="btnDelete" class="btn btn-default btn-sm pull-right">
+                    <span class="glyphicon glyphicon-ok-sign"></span> Delete Appointment
+                </button>
+                <p id="pDetails"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var events = [];
+            var selectedEvent = null;
+            FetchEventAndRenderCalendar();
+            function FetchEventAndRenderCalendar() {
+                events = [];
+                $.ajax({
+                    type: "GET",
+                    url: "/EmployeeCalendar/GetEvents",
+                    success: function (data) {
+                        $.each(data, function (i, v) {
+                            events.push({
+                                eventID: v.EventID,
+                                title: v.Subject,
+                                user: v.UserName,
+                                start: moment(v.Start),
+                                end: moment(v.End)
+                            });
+                        })
+
+                        GenerateCalendar(events);
+                    },
+                    error: function (error) {
+                        alert('failed');
+                    }
+                })
+            }
+
+
+            function GenerateCalendar(events) {
+                $('#calendar').fullCalendar('destroy');
+                $('#calendar').fullCalendar({
+                    contentHeight: 400,
+                    defaultDate: new Date(),
+                    timeFormat: 'h(:mm)a',
+                    header: {
+                        left: 'prev, next today',
+                        center: 'title',
+                        right: 'month, basicWeek, basicDay, agenda'
+                    },
+                    eventLimit: true,
+                    eventColor: '#378006',
+                    events: events,
+                    eventClick: function (calEvent, jsEvent, view) {
+                        selectedEvent = calEvent;
+                        $('#myModal #eventTitle').text(calEvent.title);
+                        var $description = $('<div/>');
+
+                        $description.append($('<p/>').html('<b>Start: </b>' + calEvent.start.format("DD-MM-YYYY HH:mm a")));
+                        $description.append($('<p/>').html('<b>End: </b>' + calEvent.end.format("DD-MM-YYYY HH:mm a")));
+                        $description.append($('<p/>').html('<b>Username: </b>' + calEvent.user));
+                        $('#myModal #pDetails').empty().html($description);
+
+                        $('#myModal').modal();
+                    },
+                    selectable: true,
+                    select: function (start, end) {
+                        selectedEvent = {
+                            EventID: 0,
+                            title: '',
+                            user: '',
+                            start: start,
+                            end: end,
+                            color: ''
+
+                        };
+                        openAddEditForm();
+                        $('#calendar').fullCalendar('unselect');
+                    },
+                    editable: true,
+                    eventDrop: function (event) {
+                        var data = {
+                            EventID: event.EventID,
+                            Subject: event.title,
+                            Start: event.start.format('DD/MM/YYYY HH:mm A'),
+                            End: event.end != null ? event.end.format('DD/MM/YYYY HH:mm A') : null,
+                            Username: event.UserName,
+                            ThemeColor: event.color
+                        };
+                        SaveEvent(data);
+                    }
+
+
+                })
+
+            }
+
+
+
+            $('#btnDelete').click(function () {
+                if (selectedEvent != null && confirm('Delete this booking?')) {
+                    $.ajax({
+                        type: "POST",
+                        url: '/EmployeeCalendar/DeleteAppointment',
+                        data: { 'eventID': selectedEvent.eventID },
+                        success: function (data) {
+                            if (data.status === true) {
+                                //Refresh calendar
+                                FetchEventAndRenderCalendar();
+                                $('#myModal').modal('hide');
+                                alert('Deletion successful.');
+                            }
+                            else if (data.status === false) {
+                                FetchEventAndRenderCalendar();
+                                $('#myModal').modal('hide');
+                            }
+                        },
+                        error: function () {
+                            alert('Failed');
+
+                        }
+                    })
+                }
+            })
+
+            $('#dtp1, #dtp2').datetimepicker({
+                format: 'DD/MM/YYYY HH:mm A'
+            });
+
+
+
+        })
+
+    </script>
+}

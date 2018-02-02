@@ -12,6 +12,11 @@ namespace FYPInitial.Controllers
     {
         public ActionResult Index()
         {
+            if (User.IsInRole("Customer") | User.IsInRole("Admin") | User.IsInRole("Employee"))
+            {
+                return RedirectToAction("Index", "User");
+            }
+            else
             return View();
         }
 

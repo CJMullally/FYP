@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FYPInitial.CustomFilters;
+using System.Globalization;
 
 // Tutorial Used: https://youtu.be/Jt9vSY802mM
 
@@ -12,26 +13,44 @@ using FYPInitial.CustomFilters;
 
 namespace FYPInitial.Controllers
 {
-    [AuthLog(Roles = "Admin")]
+    [AuthLog(Roles = "Customer, Admin, Employee")]
     public class CalendarController : Controller
     {
         // GET: Calendar
-        [AllowAnonymous]
+        
         public ActionResult Index()
         {
             return View();
         }
 
-        [AllowAnonymous]
+        
         public JsonResult GetEvents()
         {
             //Populate the calendar
+            
             using (Models.DBModels dbModel = new DBModels()) {
+
                 var events = dbModel.events.ToList();
+
+                //If event date is in the past change event colour to red
+                foreach (var myevent in events)
+                {
+                    long systime = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                    long starttime = long.Parse(myevent.Start.ToString("yyyyMMddHHmmss"));
+
+                    if (systime > starttime)
+                    {
+                        myevent.ThemeColor = "orange";
+                    }
+
+                    dbModel.SaveChanges();
+                }
+
                 return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
         }
 
+        [AuthLog(Roles = "Admin")]
         [HttpPost]
         public JsonResult SaveEvent(@event e)
         {
@@ -48,8 +67,7 @@ namespace FYPInitial.Controllers
                         v.Start = e.Start;
                         v.End = e.End;
                         v.Description = e.Description;
-                        v.IsFullDay = e.IsFullDay;
-                        v.ThemeColour = e.ThemeColour;
+                        v.ThemeColor = e.ThemeColor;
                     }
                 }
                 else
@@ -63,6 +81,7 @@ namespace FYPInitial.Controllers
                 return new JsonResult { Data = new { status = status } };
         }
 
+        [AuthLog(Roles = "Admin")]
         [HttpPost]
         public JsonResult DeleteEvent(int EventID)
         {
