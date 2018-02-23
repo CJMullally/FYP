@@ -30,7 +30,7 @@ namespace FYPInitial.Controllers
             }
             else
             {
-                ViewBag.Name = "Not Logged IN";
+                ViewBag.Name = "Not logged in";
             }
             return View();
         }

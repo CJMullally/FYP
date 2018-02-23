@@ -16,11 +16,14 @@
             </div>
             <div class="modal-body">
                 <button id="btnDelete" class="btn btn-default btn-sm pull-right">
-                    <span class="glyphicon glyphicon-ok-sign"></span> Delete Appointment
+                    <span class="glyphicon glyphicon-remove"></span> Delete Appointment
                 </button>
                 <p id="pDetails"></p>
             </div>
             <div class="modal-footer">
+                <button id="btnCompleted" class="btn btn-default btn-success fc-center">
+                    <span class="glyphicon glyphicon-thumbs-up"></span> Appointment Completed
+                </button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
         </div>
@@ -51,9 +54,13 @@
                     success: function (data) {
                         $.each(data, function (i, v) {
                             events.push({
+                                appointmentID: v.AppointmentID,
                                 eventID: v.EventID,
                                 title: v.Subject,
                                 user: v.UserName,
+                                fullName: v.FullName,
+                                address: v.Address,
+                                phone: v.PhoneNumber,
                                 start: moment(v.Start),
                                 end: moment(v.End)
                             });
@@ -89,6 +96,9 @@
 
                         $description.append($('<p/>').html('<b>Start: </b>' + calEvent.start.format("DD-MM-YYYY HH:mm a")));
                         $description.append($('<p/>').html('<b>End: </b>' + calEvent.end.format("DD-MM-YYYY HH:mm a")));
+                        $description.append($('<p/>').html('<b>Name: </b>' + calEvent.fullName));
+                        $description.append($('<p/>').html('<b>Address: </b>' + calEvent.address));
+                        $description.append($('<p/>').html('<b>Phone Number: </b>' + calEvent.phone));
                         $description.append($('<p/>').html('<b>Username: </b>' + calEvent.user));
                         $('#myModal #pDetails').empty().html($description);
 
@@ -140,6 +150,32 @@
                                 FetchEventAndRenderCalendar();
                                 $('#myModal').modal('hide');
                                 alert('Deletion successful.');
+                            }
+                            else if (data.status === false) {
+                                FetchEventAndRenderCalendar();
+                                $('#myModal').modal('hide');
+                            }
+                        },
+                        error: function () {
+                            alert('Failed');
+
+                        }
+                    })
+                }
+            })
+
+            $('#btnCompleted').click(function () {
+                if (selectedEvent != null && confirm('Complete this booking?')) {
+                    $.ajax({
+                        type: "POST",
+                        url: '/EmployeeCalendar/CompleteAppointment',
+                        data: { 'eventID': selectedEvent.eventID },
+                        success: function (data) {
+                            if (data.status === true) {
+                                //Refresh calendar
+                                FetchEventAndRenderCalendar();
+                                $('#myModal').modal('hide');
+                                alert('Completion registered.');
                             }
                             else if (data.status === false) {
                                 FetchEventAndRenderCalendar();

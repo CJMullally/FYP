@@ -5,50 +5,79 @@
 }
 <br />
 <br />
+<br />
 <h2>My Appointments</h2>
 
 <div>
-    <h4>Current Appointment</h4>
-    <hr />
-    <dl class="dl-horizontal">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Subject)
-        </dt>
+    @if (Model != null)
+    {
+        <h4>Current Appointment</h4>
+        <hr />
+        <dl class="dl-horizontal">
 
-        <dd>
-            @Html.DisplayFor(model => model.Subject)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Subject)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Start)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Subject)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Start)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Start)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.End)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Start)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.End)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.End)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.End)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
 
-        <dd>
-            @Html.ActionLink("Cancel Appointment", "Delete")
-        </dd>
-        
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+
+            <dd>
+                @Html.ActionLink("Cancel Appointment", "Delete")
+            </dd>
+            <dd>
+
+            </dd>
+
+        </dl>
+
+    }
+    else {
+        <div>
+            <br />
+            <h5>You have no appointments booked at this time.</h5>
+        </div>
+    }
+
+
+
+
+    <br />
+    <br />
+
+    <div class="fc-button-group">
+        <input type="button" value="View Service History" class="btn btn-default" onclick="location.href='@Url.Action("AppointmentHistory", "UserAppointment")'" />
+    </div>
+    
+
 
 </div>
+
+
 

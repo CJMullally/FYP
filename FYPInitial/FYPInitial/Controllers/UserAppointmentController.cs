@@ -10,26 +10,23 @@ using FYPInitial.CustomFilters;
 namespace FYPInitial.Controllers
 {
 
-    
-
+    [RequireHttps]
+    [AuthLog(Roles = "Customer, Admin, Employee")]
     public class UserAppointmentController : Controller
     {
-
-        
-
-        [AuthLog(Roles = "Customer")]
         // GET: UserAppointment
         public ActionResult Index()
         {
             userevent usereventModel = new userevent();
             string currentUserId = User.Identity.GetUserId();
-            using (DBModels dBModel = new DBModels()) {
+            using (DBModels dBModel = new DBModels())
+            {
                 usereventModel = dBModel.userevents.Where(x => x.UserID == currentUserId).FirstOrDefault();
             }
 
             return View(usereventModel);
-            
-            
+
+
         }
 
         // GET: UserAppointment/Delete
@@ -51,22 +48,36 @@ namespace FYPInitial.Controllers
         public ActionResult Delete(FormCollection collection)
         {
             string userid = User.Identity.GetUserId();
-            
+
             using (DBModels dBModel = new DBModels())
             {
                 userevent usereventModel = dBModel.userevents.Where(x => x.UserID == userid).FirstOrDefault();
                 if (usereventModel != null)
                 {
-
+                    var v = dBModel.events.Where(a => a.EventID == usereventModel.EventID).FirstOrDefault();
+                    v.ThemeColor = "";
                     dBModel.userevents.Remove(usereventModel);
                     dBModel.SaveChanges();
                 }
-           
+
             }
             return RedirectToAction("Index");
         }
 
+        public ActionResult AppointmentHistory()
+        {
+            string userid = User.Identity.GetUserId();
+            using (DBModels dBModel = new DBModels())
+            {
+                servicehistory servicehistoryModel = dBModel.servicehistories.Where(x => x.CustomerID == userid).FirstOrDefault();
+
+                var servicehistory = from s in dBModel.servicehistories
+                               select s;
+
+                return View(servicehistory.ToList());
+            }
 
 
+        }
     }
 }

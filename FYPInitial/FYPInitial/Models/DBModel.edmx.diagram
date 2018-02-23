@@ -6,8 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="e9b712a8ecf04abd8fb683ebe8825f7c" Name="Diagram1">
         <EntityTypeShape EntityType="cleanenergyirelanddbModel.product" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="cleanenergyirelanddbModel.event" Width="1.5" PointX="4.625" PointY="0.875" />
-        <EntityTypeShape EntityType="cleanenergyirelanddbModel.userevent" Width="1.5" PointX="8.125" PointY="1" />
+        <EntityTypeShape EntityType="cleanenergyirelanddbModel.event" Width="1.5" PointX="2.875" PointY="0.75" />
+        <EntityTypeShape EntityType="cleanenergyirelanddbModel.servicehistory" Width="1.5" PointX="5.375" PointY="0.875" />
+        <EntityTypeShape EntityType="cleanenergyirelanddbModel.userevent" Width="1.5" PointX="7.625" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

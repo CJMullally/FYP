@@ -32,7 +32,7 @@ namespace FYPInitial.Controllers
 
                 var events = dbModel.events.ToList();
 
-                //If event date is in the past change event colour to red
+                //If event date is in the past change event colour to orange
                 foreach (var myevent in events)
                 {
                     long systime = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));

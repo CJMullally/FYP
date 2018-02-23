@@ -12,18 +12,16 @@ namespace FYPInitial.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class userevent
+    public partial class servicehistory
     {
         public int AppointmentID { get; set; }
-        public int EventID { get; set; }
-        public string Subject { get; set; }
-        public System.DateTime Start { get; set; }
-        public System.DateTime End { get; set; }
-        public string UserID { get; set; }
-        public string UserName { get; set; }
-        public string FullName { get; set; }
+        public string EmployeeID { get; set; }
+        public string EmployeeName { get; set; }
+        public string CustomerID { get; set; }
         public string Address { get; set; }
         public string Eircode { get; set; }
-        public string PhoneNumber { get; set; }
+        public Nullable<System.DateTime> Start { get; set; }
+        public Nullable<System.DateTime> End { get; set; }
+        public string Description { get; set; }
     }
 }

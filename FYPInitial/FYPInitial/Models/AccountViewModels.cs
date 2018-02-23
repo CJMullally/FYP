@@ -69,6 +69,24 @@ namespace FYPInitial.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "Full name is required.")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
+
+        [Required(ErrorMessage = "Address is required.")]
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
+        [Required(ErrorMessage = "Eircode is required (Use https://finder.eircode.ie/#/ to find your Eircode.")]
+        [Display(Name = "Eircode")]
+        public string Eircode { get; set; }
+
+        [Required(ErrorMessage = "Phone number is required.")]
+        [Phone]
+        [Display(Name = "Phone Number")]
+        public string PhoneNo { get; set; }
+
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]

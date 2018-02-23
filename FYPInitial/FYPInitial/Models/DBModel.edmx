@@ -25,6 +25,21 @@
           <Property Name="Price" Type="decimal" Precision="10" Scale="0" />
           <Property Name="Count" Type="int" />
         </EntityType>
+        <EntityType Name="servicehistory">
+          <Key>
+            <PropertyRef Name="AppointmentID" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="AppointmentID" Type="int" Nullable="false" />
+          <Property Name="EmployeeID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="EmployeeName" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="CustomerID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Eircode" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Start" Type="datetime" Precision="0" />
+          <Property Name="End" Type="datetime" Precision="0" />
+          <Property Name="Description" Type="varchar" MaxLength="45" />
+        </EntityType>
         <EntityType Name="userevents">
           <Key>
             <PropertyRef Name="AppointmentID" />
@@ -36,10 +51,15 @@
           <Property Name="End" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="UserID" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="UserName" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Eircode" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityContainer Name="cleanenergyirelanddbModelStoreContainer">
           <EntitySet Name="events" EntityType="Self.events" Schema="cleanenergyirelanddb" store:Type="Tables" />
           <EntitySet Name="product" EntityType="Self.product" Schema="cleanenergyirelanddb" store:Type="Tables" />
+          <EntitySet Name="servicehistory" EntityType="Self.servicehistory" Schema="cleanenergyirelanddb" store:Type="Tables" />
           <EntitySet Name="userevents" EntityType="Self.userevents" Schema="cleanenergyirelanddb" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -58,6 +78,7 @@
         <EntityContainer Name="DBModels" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="products" EntityType="Self.product" />
           <EntitySet Name="events" EntityType="cleanenergyirelanddbModel.event" />
+          <EntitySet Name="servicehistories" EntityType="cleanenergyirelanddbModel.servicehistory" />
           <EntitySet Name="userevents" EntityType="cleanenergyirelanddbModel.userevent" />
         </EntityContainer>
         <EntityType Name="event">
@@ -71,6 +92,21 @@
           <Property Name="End" Type="DateTime" Nullable="false" />
           <Property Name="ThemeColor" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="servicehistory">
+          <Key>
+            <PropertyRef Name="AppointmentID" />
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="AppointmentID" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeID" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerID" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Eircode" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Start" Type="DateTime" />
+          <Property Name="End" Type="DateTime" />
+          <Property Name="Description" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="userevent">
           <Key>
             <PropertyRef Name="AppointmentID" />
@@ -82,6 +118,10 @@
           <Property Name="End" Type="DateTime" Nullable="false" />
           <Property Name="UserID" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Eircode" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -111,9 +151,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="servicehistories">
+            <EntityTypeMapping TypeName="cleanenergyirelanddbModel.servicehistory">
+              <MappingFragment StoreEntitySet="servicehistory">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="Eircode" ColumnName="Eircode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="userevents">
             <EntityTypeMapping TypeName="cleanenergyirelanddbModel.userevent">
               <MappingFragment StoreEntitySet="userevents">
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Eircode" ColumnName="Eircode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="End" ColumnName="End" />

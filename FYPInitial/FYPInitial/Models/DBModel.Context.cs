@@ -27,6 +27,7 @@ namespace FYPInitial.Models
     
         public virtual DbSet<product> products { get; set; }
         public virtual DbSet<@event> events { get; set; }
+        public virtual DbSet<servicehistory> servicehistories { get; set; }
         public virtual DbSet<userevent> userevents { get; set; }
     }
 }
