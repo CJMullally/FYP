@@ -7,7 +7,7 @@
    Main Page for Calendar
    Uses FullCalendar*@
 
-<h2>Index</h2>
+<h2>Create, Edit & Delete Bookings</h2>
 <div id="calendar"></div>
 
 <div id="myModal" class="modal fade" role="dialog">
@@ -95,6 +95,7 @@
                         $.each(data, function (i, v) {
                             events.push({
                                 eventID: v.EventID,
+                                empID: v.EmployeeID,
                                 title: v.Subject,
                                 description: v.Description != null ? v.Description : null,
                                 start: moment(v.Start),

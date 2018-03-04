@@ -14,9 +14,13 @@ namespace FYPInitial.Controllers
         public ActionResult Index()
         {
             //Feed a different landing page to user based on role.
-            if (User.IsInRole("Customer") | User.IsInRole("Admin") | User.IsInRole("Employee"))
+            if (User.IsInRole("Customer"))
             {
                 return RedirectToAction("Index", "User");
+            }
+            else if (User.IsInRole("Admin") | User.IsInRole("Employee"))
+            {
+                return RedirectToAction("EmployeeIndex", "User");
             }
             else
             return View();

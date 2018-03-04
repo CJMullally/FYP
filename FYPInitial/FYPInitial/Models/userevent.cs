@@ -25,5 +25,6 @@ namespace FYPInitial.Models
         public string Address { get; set; }
         public string Eircode { get; set; }
         public string PhoneNumber { get; set; }
+        public string EmployeeID { get; set; }
     }
 }

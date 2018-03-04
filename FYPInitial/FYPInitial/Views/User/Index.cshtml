@@ -1,11 +1,14 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity
+@using FYPInitial.Models
+
+@{
     ViewBag.Title = "Home Page";
 }
 
 @*This is the main homepage of the web application *@
 
 <div class="jumbotron-img">
-    <h1>Clean Energy Ireland</h1>
+    <h1>Welcome @(Model.FullName + "!")</h1>
     <br />
     <p><a href="~/CustomerCalendar/Index" class="btn btn-primary btn-lg">Book an appointment &raquo;</a></p>
 </div>

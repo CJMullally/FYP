@@ -20,5 +20,6 @@ namespace FYPInitial.Models
         public System.DateTime Start { get; set; }
         public System.DateTime End { get; set; }
         public string ThemeColor { get; set; }
+        public string EmployeeID { get; set; }
     }
 }

@@ -1,0 +1,108 @@
+﻿@using Microsoft.AspNet.Identity;
+@model FYPInitial.Models.userevent
+@{
+    ViewBag.Title = "Employee Home Page";
+}
+
+@*This is the employee homepage *@
+
+<div class="jumbotron">
+    <h2>Welcome @(ViewBag.Message +"!")</h2>
+    <br />
+    <div align="center">
+        <h5>Appointments by days this week:</h5>
+        <div id="morris-donut-chart" style="max-height: 225px;" onclick="Redirect()"></div>
+    </div>
+</div>
+
+<div class="col-md-6 col-sm-12 col-xs-12">
+    <div class="panel panel-default">
+        <div class="panel-heading" align="center">
+            Appointments this Week:
+        </div>
+        <div class="panel-body">
+            <div align="center">
+                <h2>@ViewData["count"]</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 col-sm-12 col-xs-12">
+    <div class="panel panel-default">
+        <div class="panel-heading" align="center">
+            Today's Appointments:
+        </div>
+        <div class="panel-body">
+            <div align="center" onclick="Redirect()">
+                <h2>@ViewData["todaysappts"]</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+           
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" />
+
+@section Scripts{
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        Morris.Donut({
+            element: 'morris-donut-chart',
+            data: Graph(),
+            resize: true,
+        });
+        });
+
+
+    function Graph() {
+        var data = "";
+        $.ajax({
+            type: 'POST',
+            url: '/User/PopulateDonut',
+            dataType: 'json',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            data: {},
+            success: function (result) {
+                data = result;
+            },
+            error: function (xhr, status, error) {
+                alert(error);
+            }
+        });
+
+        return data;
+    }
+
+
+    function Redirect()
+    {
+    window.location = "../../EmployeeCalendar";
+    }
+
+     
+
+    </script>
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+

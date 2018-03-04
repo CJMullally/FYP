@@ -55,6 +55,7 @@ namespace FYPInitial.Controllers
 
                         //Add event to customer diary
                         w.EventID = v.EventID;
+                        w.EmployeeID = v.EmployeeID;
                         w.Subject = v.Subject;
                         w.Start = v.Start;
                         w.End = v.End;

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using FYPInitial.CustomFilters;
 using System.Globalization;
+using Microsoft.AspNet.Identity;
 
 // Tutorial Used: https://youtu.be/Jt9vSY802mM
 
@@ -50,10 +51,14 @@ namespace FYPInitial.Controllers
             }
         }
 
-        [AuthLog(Roles = "Admin")]
+        [AuthLog(Roles = "Admin, Employee")]
         [HttpPost]
         public JsonResult SaveEvent(@event e)
         {
+
+            //TO DO: Add logic to prevent employee creating multiple appointments on one time slot
+
+            var EmployeeID = User.Identity.GetUserId();
             //Save a calendar event
             var status = false;
             using (Models.DBModels dbModel = new DBModels()) {
@@ -68,10 +73,12 @@ namespace FYPInitial.Controllers
                         v.End = e.End;
                         v.Description = e.Description;
                         v.ThemeColor = e.ThemeColor;
+                        v.EmployeeID = EmployeeID;
                     }
                 }
                 else
                 {
+                    e.EmployeeID = EmployeeID;
                     dbModel.events.Add(e);
                 }
 
@@ -81,7 +88,7 @@ namespace FYPInitial.Controllers
                 return new JsonResult { Data = new { status = status } };
         }
 
-        [AuthLog(Roles = "Admin")]
+        [AuthLog(Roles = "Admin, Employee")]
         [HttpPost]
         public JsonResult DeleteEvent(int EventID)
         {

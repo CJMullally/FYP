@@ -29,6 +29,7 @@ namespace FYPInitial.Models
         [MaxLength(50)]
         [Display(Name = "Phone Number")]
         public string PhoneNo { get; set; }
+        
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

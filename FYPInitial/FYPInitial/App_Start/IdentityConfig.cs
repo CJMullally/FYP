@@ -1,4 +1,8 @@
 ﻿using System;
+using SendGrid;
+using System.Net;
+using System.Configuration;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -11,16 +15,35 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using FYPInitial.Models;
+using SendGrid.Helpers.Mail;
 
 namespace FYPInitial
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage iMessage)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            var client = new SendGridClient("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");
+
+            var msg = new SendGridMessage()
+
+            {
+
+                From = new EmailAddress("welcome@cleanenergyireland.com", "Clean Energy Ireland"),
+
+                Subject = iMessage.Subject,
+
+                PlainTextContent = iMessage.Body,
+
+                HtmlContent = "<strong>" + iMessage.Body + "</strong>"
+
+            };
+
+            msg.AddTo(new EmailAddress(iMessage.Destination));
+
+            var response = await client.SendEmailAsync(msg);
         }
+
     }
 
     public class SmsService : IIdentityMessageService

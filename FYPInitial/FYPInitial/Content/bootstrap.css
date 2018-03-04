@@ -4949,6 +4949,17 @@ a.list-group-item.active > .badge,
     background-image: url(../Content/img/homepage2.png);
 }
 
+.jumbotron-emp-img {
+    height: 300px;
+    padding: 30px;
+    margin-bottom: 30px;
+    font-size: 21px;
+    font-weight: 200;
+    line-height: 2.1428571435;
+    color: inherit;
+    background-color: #eeeeee;
+    background-image: url(../Content/img/employeejumbo.png);
+}
 .jumbotron-img h1 {
     padding-top: 30px;
     line-height: 1;
