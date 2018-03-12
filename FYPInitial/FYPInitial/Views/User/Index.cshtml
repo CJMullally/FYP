@@ -7,30 +7,75 @@
 
 @*This is the main homepage of the web application *@
 
-<div class="jumbotron-img">
-    <h1>Welcome @(Model.FullName + "!")</h1>
-    <br />
-    <p><a href="~/CustomerCalendar/Index" class="btn btn-primary btn-lg">Book an appointment &raquo;</a></p>
-</div>
+
+<link href="content/portfolio-item.css" rel="stylesheet">
 
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Official Website</h2>
-        <p>
-            Visit our official, customer facing website!
-        </p>
-        <p><a class="btn btn-default" href="http://www.cleanenergyireland.ie">Official Website &raquo;</a></p>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Welcome
+                <small>@(Model.FullName)</small>
+            </h1>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Current Stock</h2>
-        <p>View our current product range, prices and stock levels.</p>
-        <p><a class="btn btn-default" href="~/Product">View Products &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Available Appointments</h2>
-        <p>View all available upcoming appointments.</p>
-        <p><a class="btn btn-default" href="~/CustomerCalendar/Index">Appointment Calendar &raquo;</a></p>
-    </div>
-</div>
 
+    <div class="row">
+        <div class="col-md-8">
+            <div class="content">
+                <img class="img-responsive" src="~/Content/img/solarpanel.png" alt="Solar Panels">
+                <a href="~/CustomerCalendar/Index" class="btn btn-primary btn-lg">Book an appointment &raquo;</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3>Upcoming Appointments:</h3>
+            <p>@ViewData["nextAppointment"]</p>
+            <a href="~/UserAppointment/Index" class="btn btn-success btn-sm">View Appointment Details &raquo;</a>
+            <br />
+            <br />
+
+            <h3>Most Recent Appointment:</h3>
+            <p>@ViewData["daysAgo"]</p>
+            <a href="~/UserAppointment/AppointmentHistory" class="btn btn-success btn-sm">View Service History &raquo;</a>
+            <br />
+            <br />
+
+            <h3>Service Reminders:</h3>
+            @if (ViewData["serviceDate"] == null)
+            {
+                <p> You have no service reminders.</p>
+            }
+            else
+            {
+            <p>Your @ViewData["equipment"] is due a service on @ViewData["serviceDate"] .</p>
+            <p>@ViewData["daysLeft"] days remaining.</p>
+            }
+
+        </div>
+    </div>
+
+ </div>
+
+
+@section Scripts{
+
+  
+    <script src="~/Scripts/jquery-2.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript">
+            function RedirectAppointments() {
+                window.location = "../../UserAppointment";
+            }
+
+            function RedirectServiceHistory() {
+                window.location = "../../UserAppointment/AppointmentHistory";
+            }
+    </script>
+
+
+
+    
+}

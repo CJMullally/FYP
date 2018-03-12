@@ -3,10 +3,10 @@
 @{
     ViewBag.Title = "My Appointments";
 }
+
 <br />
-<br />
-<br />
-<h2>My Appointments</h2>
+
+<h2>Active Appointments</h2>
 
 <div>
 
@@ -14,14 +14,14 @@
     {
         <h4>Current Appointment</h4>
         <hr />
-        <dl class="dl-horizontal">
+        <dl class="dl-appointments">
 
             <dt>
-                @Html.DisplayNameFor(model => model.Subject)
+                @Html.DisplayNameFor(model => model.ServiceType)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Subject)
+                @Html.DisplayFor(model => model.ServiceType)
             </dd>
 
             <dt>
@@ -37,28 +37,16 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.End)
+               @Html.DisplayFor(model => model.End)
             </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.UserName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.UserName)
-            </dd>
-
-            <dd>
-                @Html.ActionLink("Cancel Appointment", "Delete")
-            </dd>
-            <dd>
-
-            </dd>
-
+           
         </dl>
 
+        <input type="button" value="Cancel Appointment" class="btn btn-danger" onclick="location.href='@Url.Action("Delete", "UserAppointment")'" />
+
     }
-    else {
+    else
+    {
         <div>
             <br />
             <h5>You have no appointments booked at this time.</h5>
@@ -66,18 +54,40 @@
     }
 
 
-
-
     <br />
     <br />
+    <br />
 
-    <div class="fc-button-group">
-        <input type="button" value="View Service History" class="btn btn-default" onclick="location.href='@Url.Action("AppointmentHistory", "UserAppointment")'" />
-    </div>
-    
+    <h4>Previous Appointments</h4>
+    <hr />
+
+    <dl class="dl-appointments">
+
+        <dt>
+            Latest appointment: 
+        </dt>
+
+        <dd>
+            @ViewData["daysAgo"]
+        </dd>
+
+     </dl>
+
+
+
+        <div class="fc-button-group">
+            <input type="button" value="View Service History" class="btn btn-success" onclick="location.href='@Url.Action("AppointmentHistory", "UserAppointment")'" />
+        </div>
+
+
 
 
 </div>
+
+<br />
+
+
+
 
 
 

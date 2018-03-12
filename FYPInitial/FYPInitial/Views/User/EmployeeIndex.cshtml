@@ -6,41 +6,49 @@
 
 @*This is the employee homepage *@
 
-<div class="jumbotron">
-    <h2>Welcome @(ViewBag.Message +"!")</h2>
-    <br />
-    <div align="center">
-        <h5>Appointments by days this week:</h5>
-        <div id="morris-donut-chart" style="max-height: 225px;" onclick="Redirect()"></div>
-    </div>
-</div>
+<link href="content/portfolio-item.css" rel="stylesheet">
 
-<div class="col-md-6 col-sm-12 col-xs-12">
-    <div class="panel panel-default">
-        <div class="panel-heading" align="center">
-            Appointments this Week:
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Welcome
+                <small>@(ViewBag.Message)</small>
+            </h1>
         </div>
-        <div class="panel-body">
-            <div align="center">
-                <h2>@ViewData["count"]</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="content">
+                <img class="img-responsive" src="~/Content/img/emphomepage.png" alt="Solar Panels">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3>Today's Appointments:</h3>
+            <p onclick="Redirect()"  style="cursor:pointer">@ViewData["todaysappts"]</p>
+            <br />
+
+            <h3>Appointments this Week:</h3>
+            <p onclick="Redirect()" style="cursor:pointer">@ViewData["count"]</p>
+            <br />
+
+            <h3>Weekly Schedule Breakdown:</h3>
+            <div id="morris-donut-chart" style="max-height: 200px; cursor:pointer;" onclick="Redirect()"  >
+                @*
+            morris.js Donut Chart:
+            Copyright (c) 2013, Olly Smith
+            All rights reserved.
+                *@
             </div>
         </div>
     </div>
+
 </div>
 
-<div class="col-md-6 col-sm-12 col-xs-12">
-    <div class="panel panel-default">
-        <div class="panel-heading" align="center">
-            Today's Appointments:
-        </div>
-        <div class="panel-body">
-            <div align="center" onclick="Redirect()">
-                <h2>@ViewData["todaysappts"]</h2>
-            </div>
-        </div>
-    </div>
-</div>
 
+<br />
 
            
 
@@ -59,6 +67,7 @@
             element: 'morris-donut-chart',
             data: Graph(),
             resize: true,
+            colors: ['#428bca']
         });
         });
 

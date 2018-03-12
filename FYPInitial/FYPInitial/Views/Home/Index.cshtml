@@ -4,30 +4,63 @@
 
 @*This is the main homepage of the web application *@
 
-<div class="jumbotron-img">
-    <h1>Clean Energy Ireland</h1>
-    <br />
-    <p><a href="~/Bookings/Index" class="btn btn-primary btn-lg">Book an appointment &raquo;</a></p>
+<br />
+<br />
+
+<link href="content/portfolio-item.css" rel="stylesheet">
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Clean Energy Ireland
+                <small>Customer Portal</small>
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="content">
+                <img class="img-responsive" src="~/Content/img/windturbines.png" alt="Wind Turbines">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3>Clean Energy Ireland</h3>
+            <p>Formed by Patrick Wycherley in 2006 and growing ever since. You can reach us Monday to Friday from 9:00 am to 5:00 pm by phone. </p>
+            <p>
+                Clean Energy Ireland is an NZEB, low energy, passive house company. Nearly Zero Energy Buildings, or NZEB are required under the Energy Performance of Buildings Directive.
+               
+            </p>
+            <br />
+            <a href="~/Account/Register" class="btn btn-primary btn-lg">Register Today! &raquo;</a>
+            <br />
+            <br />
+           
+
+            <h3>Website Features:</h3>
+            <ul>
+                <li>Book an appointment</li>
+                <li>View your service history</li>
+                <li>Manage your account details</li>
+                <li>View a property's service history</li>
+            </ul>
+        </div>
+    </div>
+
 </div>
 
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Official Website</h2>
-        <p>
-            Visit our official, customer facing website!
-        </p>
-        <p><a class="btn btn-default" href="http://www.cleanenergyireland.ie">Official Website &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Eircode Checker</h2>
-        <p> Check a property's service history using Eircode</p>
-        <p><a class="btn btn-default" href="~/ServiceHistory">History Check &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Register today!</h2>
-        <p>Login or register to book service appointments.</p>
-        <p><a class="btn btn-default" href="~/Account/Register">Sign up &raquo;</a></p>
-    </div>
-</div>
+@section Scripts{
 
+
+    <script src="~/Scripts/jquery-2.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+}

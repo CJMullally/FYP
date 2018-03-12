@@ -16,6 +16,11 @@ https://fullcalendar.io/,
 https://fullcalendar.io/license/,
 C:\Code\fyp\FYP\FYPInitial\FYPInitial\Scripts\fullcalendar
 
+morris.js v.0.5.1, Olly Smith,
+http://morrisjs.github.io/morris.js/index.html,
+http://morrisjs.github.io/morris.js/index.html#license,
+C:\Code\fyp\FYP\FYPInitial\FYPInitial\Views\User\EmployeeIndex.cshtml
+
 jQuery 3.2.1, JS Foundation and	Other Contributors,	
 https://code.jquery.com/jquery-3.2.1.min.js,
 https://github.com/jquery/jquery/blob/master/LICENSE.txt,

@@ -3,6 +3,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Owin;
+using System.Web.Mvc;
+using System.Web.Routing;
 
 [assembly: OwinStartupAttribute(typeof(FYPInitial.Startup))]
 namespace FYPInitial
@@ -16,6 +18,7 @@ namespace FYPInitial
         }
 
 
+       
 
         // Creates default user and admin roles for login  
         private void CreateRolesandUsers()

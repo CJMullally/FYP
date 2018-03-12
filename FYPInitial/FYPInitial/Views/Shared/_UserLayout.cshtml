@@ -18,18 +18,24 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Clean Energy Ireland", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a href="~/Home/Index">
+                   <img class="resize" src="~/Content/img/cei-logo.png" />
+                </a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Calendar", "Index", "CustomerCalendar")</li>
+                    <li>@Html.ActionLink("Booking Calendar", "Index", "CustomerCalendar")</li>
                     <li>@Html.ActionLink("My Appointments", "Index", "UserAppointment")</li>
+                    <li>@Html.ActionLink("Search", "Index", "ServiceHistory")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+
+    <br />
+    <br />
+
     <div class="container body-content">
         @RenderBody()
         <hr />

@@ -5,8 +5,6 @@
 }
 
 <br />
-<br />
-<br />
 
 <h2>Appointment History</h2>
 
@@ -35,7 +33,7 @@
                     @Html.DisplayNameFor(model => model.End)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    @Html.DisplayNameFor(model => model.ServiceType)
                 </th>
                 <th></th>
             </tr>
@@ -59,7 +57,7 @@
                     @Html.DisplayFor(modelItem => item.End)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @Html.DisplayFor(modelItem => item.ServiceType)
                 </td>
        
             </tr>
@@ -75,3 +73,6 @@
     }
 }
 
+<div class="fc-button-group">
+    <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Index", "UserAppointment")'" />
+</div>

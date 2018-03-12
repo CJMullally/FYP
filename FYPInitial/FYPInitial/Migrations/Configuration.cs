@@ -10,6 +10,7 @@ namespace FYPInitial.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             // Register MySQL code generator
             SetSqlGenerator("MySql.Data.MySqlClient", new MySql.Data.Entity.MySqlMigrationSqlGenerator());
         }

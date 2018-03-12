@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace FYPInitial.Models
 {
@@ -97,6 +99,16 @@ namespace FYPInitial.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public ApplicationUser GetUser()
+        {
+            var user = new ApplicationUser()
+            {
+                UserName = this.Email,
+                FullName = this.FullName,    
+            };
+            return user;
+        }
     }
 
     public class ResetPasswordViewModel
@@ -127,4 +139,49 @@ namespace FYPInitial.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+
+    public class EditUserViewModel
+    {
+        public EditUserViewModel() { }
+
+        // Allow Initialization with an instance of ApplicationUser:
+        public EditUserViewModel(ApplicationUser user)
+        {
+            this.UserName = user.UserName;
+            this.FullName = user.FullName;
+            this.Email = user.Email;
+            this.Address = user.Address;
+            this.Eircode = user.Eircode;
+            this.PhoneNo = user.PhoneNo;
+            this.UserId = user.Id;
+
+        }
+
+        public string UserId { get; set; }
+
+        [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        public string Address { get; set; }
+
+        [Required]
+        public string Eircode { get; set; }
+
+        [Required]
+        [Display(Name = "Phone Number")]
+        public string PhoneNo { get; set; }
+    }
+    
 }

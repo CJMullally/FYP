@@ -79,7 +79,6 @@ namespace FYPInitial.Controllers
                     w.Eircode = v.Eircode;
                     w.Start = v.Start;
                     w.End = v.End;
-                    w.Description = "";
 
                  
                     dbModel.servicehistories.Add(w);

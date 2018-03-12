@@ -1,14 +1,38 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Booking Calendar";
 }
 
 @* Tutorial used: https://youtu.be/Jt9vSY802mM
-    Main Page for Calendar
+    Main Page for Customer Calendar
     Uses FullCalendar*@
 
-<h2>Index</h2>
-<div id="calendar"></div>
+<br />
+
+<h2>Book an Appointment</h2>
+<div id="calendar" style="cursor:pointer;"></div>
+
+<div id="helpModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span id="eventTitle"></span></h4>
+            </div>
+            <div class="modal-body">
+                <h3>Welcome to Clean Energy Ireland!</h3>
+                <br />
+                <p>We see this is your first time using our booking calendar! To book an appointment time, simply select
+                   a green appointment slot on the calendar. </p>
+                <p>Red appointment slots are bookings that have already been taken, and 
+                   orange appointment slots are bookings that have expired.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Got it!</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -19,7 +43,7 @@
             </div>
             <div class="modal-body">
                 <button id="btnBook" class="btn btn-default btn-sm pull-right">
-                    <span class="glyphicon glyphicon-ok-sign"></span> Select Appointment
+                    <span class="glyphicon glyphicon-ok-sign"></span> Select Appointment Time
                 </button>
                 <p id="pDetails"></p>
             </div>
@@ -30,6 +54,57 @@
     </div>
 </div>
 
+<div id="myModalBookDetails" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Appointment Details</h4>
+            </div>
+            <div class="modal-body">
+                <form class="col-md-12 form-horizontal">
+                    <input type="hidden" id="hdEventID" value="0" formenctype="multipart/form-data"/>
+                    <div class="form-group">
+                        <label>Start Time</label>
+                        <div>
+                            <label id="lblStart" style="font-style: normal;"></label> 
+                        </div>
+                    </div>
+                    <div class="form-group" id="divEndDate">
+                        <label>End Time</label>
+                        <div>
+                            <label id="lblEnd" style="font-style: normal;"></label> 
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Service Type:</label>
+                        <div>
+                        <select name="Service Type" id="cboServiceType">
+                            <option>Sound Testing</option>
+                            <option>Airtightness Testing</option>
+                            <option>Solar Electricity</option>
+                            <option>Solar Hot Water</option>
+                            <option>Heat Recovery and Ventilation</option>
+                            <option>Heat Pumps</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Message (Optional)</label>
+                        <br />
+                        <textarea id="txtDescription" rows="3"></textarea>
+                    </div>
+                    
+                    
+                    <div align="center">
+                        <button type="button" id="btnSave" class="btn btn-success">Confirm Appointment</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
                 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
@@ -41,11 +116,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
+
     <script>
         $(document).ready(function () {
             var events = [];
             var selectedEvent = null;
             FetchEventAndRenderCalendar();
+            isExistingCustomer();
             function FetchEventAndRenderCalendar() {
                 events = [];
                 $.ajax({
@@ -60,11 +137,12 @@
                                 start: moment(v.Start),
                                 end: v.End != null ? moment(v.End) : null,
                                 color: v.ThemeColor != null ? v.ThemeColor : null
-                                
+
                             });
                         })
 
                         GenerateCalendar(events);
+
                     },
                     error: function (error) {
                         alert('failed');
@@ -93,12 +171,11 @@
                         var $description = $('<div/>');
                         $description.append($('<p/>').html('<b>Start: </b>' + calEvent.start.format("DD-MM-YYYY HH:mm a")));
                         $description.append($('<p/>').html('<b>End: </b>' + calEvent.end.format("DD-MM-YYYY HH:mm a")));
-                        $description.append($('<p/>').html('<b>Description: </b>' + calEvent.description));
                         $('#myModal #pDetails').empty().html($description);
 
                         $('#myModal').modal();
                     },
-                    selectable: true,
+                    selectable: false,
                     select: function (start, end) {
                         selectedEvent = {
                             EventID: 0,
@@ -113,51 +190,47 @@
                         $('#calendar').fullCalendar('unselect');
                     },
                     editable: true,
-                    eventDrop: function (event) {
-                        var data = {
-                            EventID: event.EventID,
-                            Subject: event.title,
-                            Start: event.start.format('DD/MM/YYYY HH:mm A'),
-                            End: event.end != null ? event.end.format('DD/MM/YYYY HH:mm A') : null,
-                            Description: event.description,
-                            ThemeColor: event.color
-                        };
-                        SaveEvent(data);
-                    }
-
+                    eventStartEditable: false,
 
                 })
 
             }
 
+            function isExistingCustomer() {
+                $.ajax({
+                    url: "/CustomerCalendar/ExistingCustomer",
+                    type: "POST",
+                    data: {},
+                    success: function (data) {
+
+                        if (data.result === false) {
+                            //Have the pop-up only appear once per user 
+                            if (localStorage.getItem('popState') != 'shown')
+                            {
+                                $('#helpModal').modal();
+                                localStorage.setItem('popState', 'shown')
+                            }
+                           
+                        }
+
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                    }
+
+                    
+                });
+
+            }
+
            
+
+
 
             $('#btnBook').click(function () {
                 if (selectedEvent.color != "red" && selectedEvent.color != "orange") {
-                    if (selectedEvent != null && confirm('Confirm this booking?')) {
-                        $.ajax({
-                            type: "POST",
-                            url: '/CustomerCalendar/BookAppointment',
-                            data: { 'eventID': selectedEvent.eventID },
-                            success: function (data) {
-                                if (data.status === true) {
-                                    //Refresh calendar
-                                    FetchEventAndRenderCalendar();
-                                    $('#myModal').modal('hide');
-                                    alert('Booking successful.');
-                                }
-                                else if (data.status === false) {
-                                    FetchEventAndRenderCalendar();
-                                    $('#myModal').modal('hide');
-                                    alert('You may only have one booking at a time.');
-                                }
-                            },
-                            error: function () {
-                                alert('Failed');
-
-                            }
-                        })
-                    }
+                    //Open modal dialog for edit event
+                    openAddEditForm();
                 }
                 else if (selectedEvent.color == "orange") {
                     alert('This appointment has expired.');
@@ -166,6 +239,64 @@
                     alert('This appointment has already been booked by another user.');
                 }
             })
+
+            function openAddEditForm() {
+                if (selectedEvent != null) {
+                    $('#hdEventID').val(selectedEvent.eventID);
+                    $('#lblStart').text(selectedEvent.start.format('DD/MM/YYYY HH:mm a'));
+                    $('#lblEnd').text(selectedEvent.end.format('DD/MM/YYYY HH:mm a'));
+                }
+                $('#myModal').modal('hide');
+                $('#myModalBookDetails').modal();
+            }
+        
+                     
+           
+
+            $('#btnSave').click(function () {
+                //Validation
+                if ($('#cboServiceType').val().trim() == "") {
+                    alert('Service type required.');
+                    return;
+                }
+
+                if (selectedEvent != null && confirm('Confirm this booking?')) {
+
+                    var data = {
+                        EventID: $('#hdEventID').val(),
+                        ServiceType: $('#cboServiceType').val().trim(),
+                        Start: $('#lblStart').text().trim(),
+                        End: $('#lblEnd').text().trim(),
+                        Message: $('#txtDescription').val(),
+
+                    }
+                    //Call function to submit date to server
+                    SaveEvent(data);
+                }
+            })
+
+            function SaveEvent(data) {
+                $.ajax({
+                    type: "POST",
+                    url: '/CustomerCalendar/BookAppointment',
+                    data: data,
+                    success: function (data) {
+                        if (data.status === true) {
+                            FetchEventAndRenderCalendar();
+                            $('#myModalBookDetails').modal('hide');
+                            alert('Booking successful.');
+                        }
+                        else if (data.status === false) {
+                            FetchEventAndRenderCalendar();
+                            $('#myModalBookDetails').modal('hide');
+                            alert('You may only have one booking at a time.');
+                        }
+                    },
+                    error: function () {
+                        alert('Failed');
+                    }
+                })
+            }
 
            
         })

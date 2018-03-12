@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace FYPInitial.Models
 {
@@ -29,7 +30,8 @@ namespace FYPInitial.Models
         [MaxLength(50)]
         [Display(Name = "Phone Number")]
         public string PhoneNo { get; set; }
-        
+
+        public virtual ICollection<FilePath> FilePaths { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

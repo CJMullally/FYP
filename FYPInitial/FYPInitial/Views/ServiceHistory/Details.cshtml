@@ -4,12 +4,15 @@
     ViewBag.Title = "Details";
 }
 
+
+<br />
+
 <h2>Details</h2>
 
 <div>
     <h4>Service History</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-appointments">
         <dt>
             @Html.DisplayNameFor(model => model.EmployeeName)
         </dt>
@@ -52,11 +55,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.ServiceType)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.ServiceType)
         </dd>
 
     </dl>

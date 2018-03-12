@@ -215,6 +215,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\ServiceHistoryController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserAppointmentController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="CustomFilters\AuthLogAttribute.cs" />
@@ -237,6 +238,10 @@
     <Compile Include="Migrations\201802181756061_Eircode.Designer.cs">
       <DependentUpon>201802181756061_Eircode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803071408012_FilePaths.cs" />
+    <Compile Include="Migrations\201803071408012_FilePaths.Designer.cs">
+      <DependentUpon>201803071408012_FilePaths.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DBModel.Context.cs">
@@ -257,6 +262,8 @@
     <Compile Include="Models\event.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FilePath.cs" />
+    <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\product.cs">
@@ -271,6 +278,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\DashViewModel.cs" />
+    <Compile Include="ViewModels\ManageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -279,6 +287,9 @@
     <Content Include="Content\fullcalendar.min.css" />
     <Content Include="Content\fullcalendar.print.css" />
     <Content Include="Content\fullcalendar.print.min.css" />
+    <Content Include="Content\indexbootstrap.css" />
+    <Content Include="Content\indexbootstrap.min.css" />
+    <Content Include="Content\portfolio-item.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -293,6 +304,7 @@
       <DependentUpon>DBModel.edmx</DependentUpon>
       <LastGenOutput>DBModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -305,6 +317,7 @@
     <Content Include="Models\DBModel.edmx.diagram">
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\cleanenergyireland - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.0.0.intellisense.js" />
     <Content Include="Scripts\fullcalendar\fullcalendar.js" />
     <Content Include="Scripts\fullcalendar\fullcalendar.min.js" />
@@ -449,9 +462,11 @@
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Shared\Info.cshtml" />
     <Content Include="Views\User\EmployeeIndex.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Manage\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Uploads\" />
     <Folder Include="Content\img\" />
   </ItemGroup>
   <ItemGroup>
@@ -481,6 +496,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802181756061_Eircode.resx">
       <DependentUpon>201802181756061_Eircode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803071408012_FilePaths.resx">
+      <DependentUpon>201803071408012_FilePaths.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

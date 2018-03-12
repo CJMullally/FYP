@@ -11,20 +11,41 @@ namespace FYPInitial.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class userevent
     {
         public int AppointmentID { get; set; }
+
         public int EventID { get; set; }
+
         public string Subject { get; set; }
+
+        [DisplayName("Appointment Start")]
         public System.DateTime Start { get; set; }
+
+        [DisplayName("Appointment End")]
         public System.DateTime End { get; set; }
+
         public string UserID { get; set; }
+
+        [DisplayName("Username")]
         public string UserName { get; set; }
+
+        [DisplayName("Full Name")]
         public string FullName { get; set; }
+
         public string Address { get; set; }
+
         public string Eircode { get; set; }
+
         public string PhoneNumber { get; set; }
+
         public string EmployeeID { get; set; }
+
+        [DisplayName("Service Type")]
+        public string ServiceType { get; set; }
+
+        public string Message { get; set; }
     }
 }

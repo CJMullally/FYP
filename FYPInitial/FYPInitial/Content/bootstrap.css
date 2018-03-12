@@ -1,4 +1,4 @@
-#428bca /* NUGET: BEGIN LICENSE TEXT
+/* NUGET: BEGIN LICENSE TEXT
  *
  * Microsoft grants you the right to use these script files for the sole
  * purpose of either: (i) interacting through your browser with the Microsoft
@@ -380,6 +380,12 @@ img {
   border-radius: 50%;
 }
 
+img.resize {
+    width: 200px;
+    height: 30px;
+    margin-top: 2.75%;
+    padding-right: 15%;
+}
 hr {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -637,6 +643,44 @@ dd {
   }
 }
 
+@media (min-width: 768px) {
+    .dl-appointments dt {
+        float: left;
+        width: 160px;
+        overflow: hidden;
+        clear: left;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        
+    }
+
+    .dl-appointments dd {
+        margin-left: 175px;
+        padding-bottom: 10px;
+        
+    }
+
+        .dl-appointments dd:before,
+        .dl-appointments dd:after {
+            display: table;
+            content: " ";
+        }
+
+        .dl-appointments dd:after {
+            clear: both;
+        }
+
+        .dl-appointments dd:before,
+        .dl-appointments dd:after {
+            display: table;
+            content: " ";
+        }
+
+        .dl-appointments dd:after {
+            clear: both;
+        }
+}
 abbr[title],
 abbr[data-original-title] {
   cursor: help;
@@ -4241,8 +4285,9 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-nav > li > a {
-  padding-top: 10px;
-  padding-bottom: 10px;
+
+  margin-top: 4px;
+  padding-bottom: 8px;
   line-height: 20px;
 }
 
@@ -4926,14 +4971,17 @@ a.list-group-item.active > .badge,
 }
 
 .jumbotron {
+    height: 230px;
     padding: 30px;
     margin-bottom: 30px;
     font-size: 21px;
     font-weight: 200;
     line-height: 2.1428571435;
-    color: inherit;
+    color: silver;
     background-color: #eeeeee;
-    
+    background-image: url(../Content/img/cleanenergybg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 
@@ -4949,8 +4997,8 @@ a.list-group-item.active > .badge,
     background-image: url(../Content/img/homepage2.png);
 }
 
-.jumbotron-emp-img {
-    height: 300px;
+.jumbotron-emp {
+    height: 230px;
     padding: 30px;
     margin-bottom: 30px;
     font-size: 21px;
@@ -4958,10 +5006,12 @@ a.list-group-item.active > .badge,
     line-height: 2.1428571435;
     color: inherit;
     background-color: #eeeeee;
-    background-image: url(../Content/img/employeejumbo.png);
+    background-image: url(../Content/img/empbanner.png);
+    background-size: cover;
 }
+
 .jumbotron-img h1 {
-    padding-top: 30px;
+    padding-top: 15px;
     line-height: 1;
     color: black;
 }
@@ -4982,8 +5032,17 @@ a.list-group-item.active > .badge,
 }
 
 .jumbotron h1 {
-  line-height: 1;
-  color: inherit;
+    line-height: 1;
+    color: inherit;
+    margin-top: 20%;
+    right: 20px;
+
+}
+
+.jumbotron-emp h2 {
+    margin-top: 6%;
+    line-height: 1;
+    color: black;
 }
 
 
@@ -5010,7 +5069,12 @@ a.list-group-item.active > .badge,
   }
 }
 
-
+.content a {
+    position: absolute;
+    bottom: 25px;
+    left: 40px;
+   
+}
 
 .thumbnail {
   display: inline-block;
@@ -5436,16 +5500,18 @@ a.list-group-item:focus {
 }
 
 .panel-heading {
-  padding: 10px 15px;
-  border-bottom: 1px solid transparent;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    background-color: #428bca;
 }
 
 .panel-title {
-  margin-top: 0;
-  margin-bottom: 0;
-  font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    background-color: #428bca;
 }
 
 .panel-title > a {
@@ -5453,11 +5519,11 @@ a.list-group-item:focus {
 }
 
 .panel-footer {
-  padding: 10px 15px;
-  background-color: #f5f5f5;
-  border-top: 1px solid #dddddd;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
+    padding: 10px 15px;
+    background-color: #428bca;
+    border-top: 1px solid #dddddd;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 
 .panel-group .panel {
@@ -5487,14 +5553,14 @@ a.list-group-item:focus {
 }
 
 .panel-default {
-  border-color: #dddddd;
+    border-color: #dddddd;
 }
 
-.panel-default > .panel-heading {
-  color: #333333;
-  background-color: #f5f5f5;
-  border-color: #dddddd;
-}
+    .panel-default > .panel-heading {
+        color: #f5f5f5;
+        background-color: #428bca;
+        border-color: #dddddd;
+    }
 
 .panel-default > .panel-heading + .panel-collapse .panel-body {
   border-top-color: #dddddd;
